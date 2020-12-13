@@ -11,7 +11,8 @@ const Logo = styled.img`
 
 const HeaderWrapper = styled.header`
   display: flex;
-  padding: 30px;
+  padding: 30px 30px 30px 0px;
+  border-bottom: 1px solid grey;
 `;
 
 const HeaderColumn = styled.div`
@@ -67,9 +68,16 @@ const SearchInput = styled.input`
   border-radius: 15px;
   border: 1.5px solid ${props => props.theme.darkGreyColor};
   padding-left: 20px;
+  margin-right:10px;
 `;
 
-const IconContainer = styled.div``;
+const IconContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  svg{
+    margin-right: 10px;
+  }
+`;
 
 const ME = gql`
   {

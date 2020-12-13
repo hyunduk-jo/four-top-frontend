@@ -28,15 +28,27 @@ const ThisMonthContainerColumn = styled(Link)`
   color:white;
   font-size: 12px;
   &:first-child{
-    background-color: black;
+    background-image: url(${props => props.src});
+    background-size: cover;
+    background-position: center;
   }
   &:nth-child(2){
-    background-color: red;
+    background-image: url(${props => props.src});
+    background-size: cover;
+    background-position: center;
   }
   &:last-child{
-    background-color: green;
+    background-image: url(${props => props.src});
+    background-size: cover;
+    background-position: center;
   }
   text-decoration: none;
+`;
+
+const Text = styled.div`
+  padding: 7px;
+  background-color: black;
+  opacity: 0.5;
 `;
 
 const Banner = styled.div`
@@ -61,9 +73,9 @@ const Home = ({ isLoggedIn }) => {
       <Wrapper>
         <Container>
           <ThisMonthContainer>
-            <ThisMonthContainerColumn to="">이달의 무료 작품</ThisMonthContainerColumn>
-            <ThisMonthContainerColumn to="">이달의 유료 작품</ThisMonthContainerColumn>
-            <ThisMonthContainerColumn to="">이달의 크리에이터</ThisMonthContainerColumn>
+            <ThisMonthContainerColumn to="" src={process.env.PUBLIC_URL + 'logo.jpg'}><Text>이달의 무료 작품</Text></ThisMonthContainerColumn>
+            <ThisMonthContainerColumn to="" src={process.env.PUBLIC_URL + 'logo.jpg'}><Text>이달의 유료 작품</Text></ThisMonthContainerColumn>
+            <ThisMonthContainerColumn to="" src={process.env.PUBLIC_URL + 'logo.jpg'}><Text>이달의 크리에이터</Text></ThisMonthContainerColumn>
           </ThisMonthContainer>
           <Banner>Banner</Banner>
           <Title>프로모션 / 매거진</Title>
