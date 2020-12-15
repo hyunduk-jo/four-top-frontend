@@ -8,7 +8,7 @@ const getSize = (size) => {
   } else if (size === "md") {
     number = 80
   } else if (size === "lg") {
-    number = 150
+    number = 200
   }
   return `width: ${number}px; height: ${number}px;`
 }
@@ -18,15 +18,17 @@ const Container = styled.img`
   background-size: cover;
   ${props => getSize(props.size)};
   border-radius: 50%;
+  cursor: pointer;
 `;
 
-const Avatar = ({ size, url }) => {
-  return <Container size={size} src={url} />
+const Avatar = ({ size, url, className, onClick }) => {
+  return <Container className={className} size={size} src={url} onClick={onClick} />
 }
 
 Avatar.propTypes = {
-  size: PropTypes.oneOf(["sm", "md", "md"]).isRequired,
-  url: PropTypes.string
+  size: PropTypes.oneOf(["sm", "md", "lg"]).isRequired,
+  url: PropTypes.string,
+  onClick: PropTypes.func
 }
 
 export default Avatar;

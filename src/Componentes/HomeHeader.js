@@ -4,6 +4,7 @@ import { Link, withRouter } from "react-router-dom";
 import styled from "styled-components";
 import useInput from "../Hooks/useInput";
 import { Basket, Logout, Setting, User } from "./Icons";
+import Helmet from 'react-helmet';
 
 const HeaderContainer = styled.header`
   display: flex;
@@ -109,51 +110,56 @@ const Header = ({ history, isLoggedIn }) => {
   const search = useInput("");
   const onSubmit = (e) => {
     e.preventDefault();
-    history.push(`/search?term=${search.value}`)
+    window.location = `#/search?term=${search.value}`
   }
   return (
-    <HeaderContainer>
-      <HeaderWrapper>
-        <HeaderColumn></HeaderColumn>
-        <HeaderColumn>
-          <Link to="/"><Logo src={process.env.PUBLIC_URL + '/logo.jpg'} alt="four-top-logo" /></Link>
-          <h1>4TOP</h1>
-          <h2>ALL 4th TO PEOPLE</h2>
-        </HeaderColumn>
-        <HeaderColumn>
-          <form onSubmit={onSubmit}>
-            <SearchInput placeholder="Search.." value={search.value} onChange={search.onChange} />
-          </form>
-          {
-            isLoggedIn ? (
-              <>
-                {loading && <User />}
-                {data?.me && <Link to={`/profile/${data.me.userName}`} ><User /></Link>}
-                <Link to="" ><Basket /></Link>
-                <Link to="" ><Setting /></Link>
-                <Link to="/" onClick={logOut} ><Logout /></Link>
-              </>
-            ) : (
+    <>
+      <Helmet>
+        <meta charset="utf-8" />
+      </Helmet>
+      <HeaderContainer>
+        <HeaderWrapper>
+          <HeaderColumn></HeaderColumn>
+          <HeaderColumn>
+            <Link to="/"><Logo src={process.env.PUBLIC_URL + '/logo.jpg'} alt="four-top-logo" /></Link>
+            <h1>4TOP</h1>
+            <h2>ALL 4th TO PEOPLE</h2>
+          </HeaderColumn>
+          <HeaderColumn>
+            <form onSubmit={onSubmit}>
+              <SearchInput placeholder="Search.." value={search.value} onChange={search.onChange} />
+            </form>
+            {
+              isLoggedIn ? (
                 <>
-                  <Link to="/auth" ><User /></Link>
-                  <Link to="/basket" ><Basket /></Link>
+                  {loading && <User />}
+                  {data?.me && <Link to={`/profile/${data.me.userName}`} ><User /></Link>}
+                  <Link to="" ><Basket /></Link>
+                  <Link to="" ><Setting /></Link>
+                  <Link to="/" onClick={logOut} ><Logout /></Link>
                 </>
-              )
-          }
-        </HeaderColumn>
-      </HeaderWrapper>
-      <MenuWrapper>
-        <Menu>
-          <MenuLink to="/company"><MenuItem>회사소개</MenuItem></MenuLink>
-          <MenuLink to="/gallery"><MenuItem>3D갤러리</MenuItem></MenuLink>
-          <MenuLink to="/community"><MenuItem>커뮤니티</MenuItem></MenuLink>
-          <MenuLink to="/rental"><MenuItem>렌탈</MenuItem></MenuLink>
-          <MenuLink to="/promotion"><MenuItem>프로모션</MenuItem></MenuLink>
-          <MenuLink to="/magazine"><MenuItem>매거진</MenuItem></MenuLink>
-          <MenuLink to="/servicecenter"><MenuItem>고객센터</MenuItem></MenuLink>
-        </Menu>
-      </MenuWrapper>
-    </HeaderContainer>
+              ) : (
+                  <>
+                    <Link to="/auth" ><User /></Link>
+                    <Link to="/basket" ><Basket /></Link>
+                  </>
+                )
+            }
+          </HeaderColumn>
+        </HeaderWrapper>
+        <MenuWrapper>
+          <Menu>
+            <MenuLink to="/company"><MenuItem>회사소개</MenuItem></MenuLink>
+            <MenuLink to="/gallery"><MenuItem>3D갤러리</MenuItem></MenuLink>
+            <MenuLink to="/community"><MenuItem>커뮤니티</MenuItem></MenuLink>
+            <MenuLink to="/rental"><MenuItem>렌탈</MenuItem></MenuLink>
+            <MenuLink to="/promotion"><MenuItem>프로모션</MenuItem></MenuLink>
+            <MenuLink to="/magazine"><MenuItem>매거진</MenuItem></MenuLink>
+            <MenuLink to="/servicecenter"><MenuItem>고객센터</MenuItem></MenuLink>
+          </Menu>
+        </MenuWrapper>
+      </HeaderContainer>
+    </>
   )
 }
 

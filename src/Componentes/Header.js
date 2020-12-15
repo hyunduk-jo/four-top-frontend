@@ -4,6 +4,7 @@ import { Link, withRouter } from "react-router-dom";
 import styled from "styled-components"
 import useInput from "../Hooks/useInput";
 import { Basket, Logout, Setting, User } from "./Icons";
+import Helmet from 'react-helmet';
 
 const Logo = styled.img`
   width: 120px;
@@ -13,6 +14,7 @@ const HeaderWrapper = styled.header`
   display: flex;
   padding: 30px 30px 30px 0px;
   border-bottom: 1px solid grey;
+  margin-bottom: 20px;
 `;
 
 const HeaderColumn = styled.div`
@@ -101,49 +103,56 @@ const Header = ({ history, isLoggedIn }) => {
     e.preventDefault();
     history.push(`/search?term=${search.value}`);
   }
-  return <HeaderWrapper>
-    <HeaderColumn>
-      <Link to="/"><Logo src={process.env.PUBLIC_URL + '/logo.jpg'} alt="four-top-logo" /></Link>
-      <HeaderColumnText>
-        <h1>4TOP</h1>
-        <h2>ALL 4th TO PEOPLE</h2>
-      </HeaderColumnText>
-    </HeaderColumn>
-    <HeaderColumn>
-      <Menu>
-        <MenuLink to="/company"><MenuItem>회사소개</MenuItem></MenuLink>
-        <MenuLink to="/gallery"><MenuItem>3D갤러리</MenuItem></MenuLink>
-        <MenuLink to="/community"><MenuItem>커뮤니티</MenuItem></MenuLink>
-        <MenuLink to="/rental"><MenuItem>렌탈</MenuItem></MenuLink>
-        <MenuLink to="/promotion"><MenuItem>프로모션</MenuItem></MenuLink>
-        <MenuLink to="/magazine"><MenuItem>매거진</MenuItem></MenuLink>
-        <MenuLink to="/servicecenter"><MenuItem>고객센터</MenuItem></MenuLink>
-      </Menu>
-    </HeaderColumn>
-    <HeaderColumn>
-      <form onSubmit={onSubmit}>
-        <SearchInput value={search.value} onChange={search.onChange} />
-      </form>
-      <IconContainer>
-        {
-          isLoggedIn ? (
-            <>
-              {loading && <User />}
-              {data?.me && <Link to={`/profile/${data.me.userName}`} ><User /></Link>}
-              <Link to="" ><Basket /></Link>
-              <Link to="" ><Setting /></Link>
-              <Link to="/" onClick={logOut} ><Logout /></Link>
-            </>
-          ) : (
-              <>
-                <Link to="/auth" ><User /></Link>
-                <Link to="/basket" ><Basket /></Link>
-              </>
-            )
-        }
-      </IconContainer>
-    </HeaderColumn>
-  </HeaderWrapper>
+  return (
+    <>
+      <Helmet>
+        <meta charSet="utf-8" />
+      </Helmet>
+      <HeaderWrapper>
+        <HeaderColumn>
+          <Link to="/"><Logo src={process.env.PUBLIC_URL + '/logo.jpg'} alt="four-top-logo" /></Link>
+          <HeaderColumnText>
+            <h1>4TOP</h1>
+            <h2>ALL 4th TO PEOPLE</h2>
+          </HeaderColumnText>
+        </HeaderColumn>
+        <HeaderColumn>
+          <Menu>
+            <MenuLink to="/company"><MenuItem>회사소개</MenuItem></MenuLink>
+            <MenuLink to="/gallery"><MenuItem>3D갤러리</MenuItem></MenuLink>
+            <MenuLink to="/community"><MenuItem>커뮤니티</MenuItem></MenuLink>
+            <MenuLink to="/rental"><MenuItem>렌탈</MenuItem></MenuLink>
+            <MenuLink to="/promotion"><MenuItem>프로모션</MenuItem></MenuLink>
+            <MenuLink to="/magazine"><MenuItem>매거진</MenuItem></MenuLink>
+            <MenuLink to="/servicecenter"><MenuItem>고객센터</MenuItem></MenuLink>
+          </Menu>
+        </HeaderColumn>
+        <HeaderColumn>
+          <form onSubmit={onSubmit}>
+            <SearchInput value={search.value} onChange={search.onChange} />
+          </form>
+          <IconContainer>
+            {
+              isLoggedIn ? (
+                <>
+                  {loading && <User />}
+                  {data?.me && <Link to={`/profile/${data.me.userName}`} ><User /></Link>}
+                  <Link to="" ><Basket /></Link>
+                  <Link to="" ><Setting /></Link>
+                  <Link to="/" onClick={logOut} ><Logout /></Link>
+                </>
+              ) : (
+                  <>
+                    <Link to="/auth" ><User /></Link>
+                    <Link to="/basket" ><Basket /></Link>
+                  </>
+                )
+            }
+          </IconContainer>
+        </HeaderColumn>
+      </HeaderWrapper>
+    </>
+  )
 }
 
 export default withRouter(Header);
