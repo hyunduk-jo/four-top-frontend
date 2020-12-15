@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import HomeHeader from "../Componentes/HomeHeader";
 
 const Wrapper = styled.div`
   display: flex;
@@ -66,28 +65,23 @@ const Title = styled.h1`
   font-size: 12px;
 `;
 
-const Home = ({ isLoggedIn }) => {
-  return (
-    <>
-      <HomeHeader isLoggedIn={isLoggedIn} />
-      <Wrapper>
-        <Container>
-          <ThisMonthContainer>
-            <ThisMonthContainerColumn to="" src={process.env.PUBLIC_URL + 'logo.jpg'}><Text>이달의 무료 작품</Text></ThisMonthContainerColumn>
-            <ThisMonthContainerColumn to="" src={process.env.PUBLIC_URL + 'logo.jpg'}><Text>이달의 유료 작품</Text></ThisMonthContainerColumn>
-            <ThisMonthContainerColumn to="" src={process.env.PUBLIC_URL + 'logo.jpg'}><Text>이달의 크리에이터</Text></ThisMonthContainerColumn>
-          </ThisMonthContainer>
-          <Banner>Banner</Banner>
-          <Title>프로모션 / 매거진</Title>
-          <Banner>Banner</Banner>
-          <Title>렌탈</Title>
-          <Banner>Banner</Banner>
-          <Title>회사소개</Title>
-          <Banner>Banner</Banner>
-        </Container>
-      </Wrapper >
-    </>
-  )
+const Home = () => {
+  return <Wrapper>
+    <Container>
+      <ThisMonthContainer>
+        <ThisMonthContainerColumn to="" src={process.env.PUBLIC_URL + 'logo.jpg'}><Text>이달의 무료 작품</Text></ThisMonthContainerColumn>
+        <ThisMonthContainerColumn to="" src={process.env.PUBLIC_URL + 'logo.jpg'}><Text>이달의 유료 작품</Text></ThisMonthContainerColumn>
+        <ThisMonthContainerColumn to="" src={process.env.PUBLIC_URL + 'logo.jpg'}><Text>이달의 크리에이터</Text></ThisMonthContainerColumn>
+      </ThisMonthContainer>
+      <Banner>Banner</Banner>
+      <Title>프로모션 / 매거진</Title>
+      <Banner>Banner</Banner>
+      <Title>렌탈</Title>
+      <Banner>Banner</Banner>
+      <Title>회사소개</Title>
+      <Banner>Banner</Banner>
+    </Container>
+  </Wrapper >
 }
 
 export default Home;

@@ -5,7 +5,7 @@ import Auth from '../Routes/Auth';
 import Basket from '../Routes/Basket';
 import Profile from '../Routes/Profile';
 import Company from '../Routes/Company';
-import Gallery from '../Routes/Gallery';
+import Gallery from '../Routes/Gallery/Gallery';
 import Community from '../Routes/Community';
 import Rental from '../Routes/Rental';
 import Promotion from '../Routes/Promotion';
@@ -13,24 +13,29 @@ import Magazine from '../Routes/Magazine';
 import ServiceCenter from '../Routes/ServiceCenter';
 import Header from './Header';
 import Search from '../Routes/Search/index';
+import HomeHeader from './HomeHeader';
+import GalleryNew from '../Routes/Gallery/GalleryNew';
 
 
 const AppRouter = ({ isLoggedIn }) => {
   return (
     <Switch>
-      <Route exact path="/" render={() => <Home isLoggedIn={isLoggedIn} />} />
+      <Route exact path="/" render={() => <><HomeHeader isLoggedIn={isLoggedIn} /><Home /></>} />
       <Route path="/auth" component={Auth} />
 
       <Route path="/search" render={() => <><Header isLoggedIn={isLoggedIn} /><Search /></>} />
-      <Route path="/basket" render={() => <Basket isLoggedIn={isLoggedIn} />} />
-      <Route path="/company" render={() => <Company isLoggedIn={isLoggedIn} />} />
-      <Route path="/gallery" render={() => <Gallery isLoggedIn={isLoggedIn} />} />
-      <Route path="/community" render={() => <Community isLoggedIn={isLoggedIn} />} />
-      <Route path="/rental" render={() => <Rental isLoggedIn={isLoggedIn} />} />
-      <Route path="/promotion" render={() => <Promotion isLoggedIn={isLoggedIn} />} />
-      <Route path="/magazine" render={() => <Magazine isLoggedIn={isLoggedIn} />} />
-      <Route path="/servicecenter" render={() => <ServiceCenter isLoggedIn={isLoggedIn} />} />
-      <Route path="/profile/:username" render={() => <Profile isLoggedIn={isLoggedIn} />} />
+      <Route path="/basket" render={() => <><Header isLoggedIn={isLoggedIn} /><Basket /></>} />
+      <Route path="/company" render={() => <><Header isLoggedIn={isLoggedIn} /><Company /></>} />
+
+      <Route exact path="/gallery" render={() => <><Header isLoggedIn={isLoggedIn} /><Gallery /></>} />
+      <Route path="/gallery/new" render={() => <><Header isLoggedIn={isLoggedIn} /><GalleryNew /></>} />
+
+      <Route path="/community" render={() => <><Header isLoggedIn={isLoggedIn} /><Community /></>} />
+      <Route path="/rental" render={() => <><Header isLoggedIn={isLoggedIn} /><Rental /></>} />
+      <Route path="/promotion" render={() => <><Header isLoggedIn={isLoggedIn} /><Promotion /></>} />
+      <Route path="/magazine" render={() => <><Header isLoggedIn={isLoggedIn} /><Magazine /></>} />
+      <Route path="/servicecenter" render={() => <><Header isLoggedIn={isLoggedIn} /><ServiceCenter /></>} />
+      <Route path="/profile/:username" render={() => <><Header isLoggedIn={isLoggedIn} /><Profile /></>} />
     </Switch>
   )
 }

@@ -4,7 +4,6 @@ import Greetings from "../Componentes/Company/Greetings";
 import History from "../Componentes/Company/History";
 import Intro from "../Componentes/Company/Intro";
 import Vision from "../Componentes/Company/Vision";
-import Header from "../Componentes/Header";
 
 const Container = styled.div`
   margin-top: 60px;
@@ -51,54 +50,49 @@ const TabComponent = styled.div`
   margin-top: 30px;
 `;
 
-const Company = ({ isLoggedIn }) => {
+const Company = () => {
   const [action, setAction] = useState("intro");
-  return (
-    <>
-      <Header isLoggedIn={isLoggedIn} />
-      <Container>
-        <ShortInfo>
-          <ShortInfoText>
-            <h1>4TOP</h1>
-            <h2>회사 한줄 소개</h2>
-          </ShortInfoText>
-        </ShortInfo>
-        <TabContainer>
-          <Tab onClick={() => setAction("intro")}>소개</Tab>
-          <Tab onClick={() => setAction("greetings")}>인사말</Tab>
-          <Tab onClick={() => setAction("vision")}>비전 & 미션</Tab>
-          <Tab onClick={() => setAction("history")}>연혁</Tab>
-        </TabContainer>
-        {
-          action === "intro" && (
-            <TabComponent>
-              <Intro />
-            </TabComponent>
-          )
-        }
-        {
-          action === "greetings" && (
-            <TabComponent>
-              <Greetings />
-            </TabComponent>
-          )
-        }
-        {
-          action === "vision" && (
-            <TabComponent>
-              <Vision />
-            </TabComponent>
-          )
-        }
-        {
-          action === "history" && (
-            <TabComponent>
-              <History />
-            </TabComponent>
-          )
-        }
-      </Container>
-    </>
-  )
+  return <Container>
+    <ShortInfo>
+      <ShortInfoText>
+        <h1>4TOP</h1>
+        <h2>회사 한줄 소개</h2>
+      </ShortInfoText>
+    </ShortInfo>
+    <TabContainer>
+      <Tab onClick={() => setAction("intro")}>소개</Tab>
+      <Tab onClick={() => setAction("greetings")}>인사말</Tab>
+      <Tab onClick={() => setAction("vision")}>비전 & 미션</Tab>
+      <Tab onClick={() => setAction("history")}>연혁</Tab>
+    </TabContainer>
+    {
+      action === "intro" && (
+        <TabComponent>
+          <Intro />
+        </TabComponent>
+      )
+    }
+    {
+      action === "greetings" && (
+        <TabComponent>
+          <Greetings />
+        </TabComponent>
+      )
+    }
+    {
+      action === "vision" && (
+        <TabComponent>
+          <Vision />
+        </TabComponent>
+      )
+    }
+    {
+      action === "history" && (
+        <TabComponent>
+          <History />
+        </TabComponent>
+      )
+    }
+  </Container>
 }
 export default Company;

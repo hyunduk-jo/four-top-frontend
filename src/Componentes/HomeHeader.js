@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { gql } from "apollo-boost";
 import { Link, withRouter } from "react-router-dom";
 import styled from "styled-components";
@@ -85,6 +85,10 @@ const MenuLink = styled(Link)`
   color: inherit;
 `;
 
+/* const Button = styled.span`
+  cursor: pointer;
+`; */
+
 const ME = gql`
   {
     me{
@@ -93,8 +97,15 @@ const ME = gql`
   }
 `;
 
+const LOG_OUT = gql`
+  mutation logUserOut{
+    logUserOut @client
+  }
+`;
+
 const Header = ({ history, isLoggedIn }) => {
-  const { data } = useQuery(ME);
+  const { data, loading } = useQuery(ME);
+  const [logOut] = useMutation(LOG_OUT);
   const search = useInput("");
   const onSubmit = (e) => {
     e.preventDefault();
@@ -116,10 +127,11 @@ const Header = ({ history, isLoggedIn }) => {
           {
             isLoggedIn ? (
               <>
-                {data && data.me && <Link to={`/profile/${data.me.userName}`} ><User /></Link>}
-                <Link to="" ><Setting /></Link>
-                <Link to="" ><Logout /></Link>
+                {loading && <User />}
+                {data?.me && <Link to={`/profile/${data.me.userName}`} ><User /></Link>}
                 <Link to="" ><Basket /></Link>
+                <Link to="" ><Setting /></Link>
+                <Link to="/" onClick={logOut} ><Logout /></Link>
               </>
             ) : (
                 <>
