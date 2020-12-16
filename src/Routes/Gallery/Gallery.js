@@ -102,7 +102,7 @@ const Gallery = () => {
           {
             !postLoading && postData?.allPost && (
               postData.allPost.map(post => {
-                return <GalleryPost key={post.id} title={post.title} likesCount={post.likesCount} user={post.user} files={post.files} />
+                return <GalleryPost key={post.id} postId={post.id} title={post.title} likesCount={post.likesCount} user={post.user} files={post.files} />
               })
             )
           }

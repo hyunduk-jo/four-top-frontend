@@ -13,7 +13,7 @@ const UPLOAD = gql`
   }
 `;
 
-const GalleryNew = () => {
+const GalleryNew = ({ isLoggedIn }) => {
   const title = useInput("");
   const description = useInput("");
 
@@ -57,14 +57,23 @@ const GalleryNew = () => {
     setFiles(files);
   }
 
-  return <Container>
-    <form name="file" encType="multipart/form-data">
-      <input type="file" multiple name="file" onChange={onChange} />
-      <input placeholder="Title" name="title" value={title.value} onChange={title.onChange} />
-      <input placeholder="Description" name="description" value={description.value} onChange={description.onChange} />
-      <button onClick={onClick}>Upload</button>
-    </form>
-  </Container>
+  return (
+    <>
+      {
+        isLoggedIn ? (
+          <Container>
+            <form name="file" encType="multipart/form-data">
+              <input type="file" multiple name="file" onChange={onChange} />
+              <input placeholder="Title" name="title" value={title.value} onChange={title.onChange} />
+              <input placeholder="Description" name="description" value={description.value} onChange={description.onChange} />
+              <button onClick={onClick}>Upload</button>
+            </form>
+          </Container>
+        ) : (window.location = "#/auth", alert("You need to login"))
+      }
+
+    </>
+  )
 }
 
 export default GalleryNew;

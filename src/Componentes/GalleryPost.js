@@ -4,7 +4,7 @@ import Avatar from "./Avatar";
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 210px;
+  width: 220px;
   height: 300px;
   padding: 15px;
   margin: 20px 50px 20px 0px;
@@ -15,6 +15,7 @@ const MainPhoto = styled.img`
   background-image: url(${props => props.src});
   background-size: cover;
   background-position: center;
+  overflow: hidden;
 `;
 
 const UserContainer = styled.div`
@@ -33,11 +34,16 @@ const Username = styled.div`
 
 const Title = styled.div`
   text-align: center;
+  width: 80px;
+  overflow: hidden;
+  white-space:nowrap;
+  text-overflow: ellipsis;
+  display: inline-block;
 `;
 
 const Like = styled.div``;
 
-const GalleryPost = ({ title, likesCount, user, files }) => {
+const GalleryPost = ({ title, likesCount, user, files, id }) => {
   return <Wrapper>
     <MainPhoto src={files[0].url} />
     <UserContainer>
