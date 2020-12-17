@@ -1,6 +1,6 @@
 import { ThemeProvider } from 'styled-components';
 import Theme from '../Styles/Theme';
-import { HashRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import GlobalStyles from '../Styles/GlobalStyles';
 import AppRouter from './Router';
 import { gql } from 'apollo-boost';

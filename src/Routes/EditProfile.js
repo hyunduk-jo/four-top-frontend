@@ -100,8 +100,7 @@ const EditProfile = () => {
 
   const [editUserMutation] = useMutation(EDIT_USER);
   const [file, setFile] = useState([]);
-  const [fileUrl, setFileUrl] = useState(); // For image preview
-
+  const [fileUrl, setFileUrl] = useState(data?.me?.avatar); // For image preview
   const onClick = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -137,6 +136,7 @@ const EditProfile = () => {
     }
   }
 
+
   return (
     <>
       {
@@ -148,26 +148,29 @@ const EditProfile = () => {
             <Container>
               <EditContainer>
                 <Title>프로필 변경</Title>
-                <Avatar size="lg" url={fileUrl} />
+                {(fileUrl === null || fileUrl === undefined) ? <Avatar size="lg" url={data.me.avatar} /> : <Avatar size="lg" url={fileUrl} />}
                 <form name="avatar" encType="multipart/form-data">
                   <Label>
                     <UserName>{data.me.userName}</UserName>
                   </Label>
                   <Label>
-                    <label id="file">Avatar</label>
+                    <label htmlFor="file">Avatar</label>
                     <input id="file" type="file" name="avatar" onChange={onChange} />
                   </Label>
                   <Label>
-                    <label id="firstName">First Name</label>
-                    <input placeholder={data.me.firstName} id="firstName" value={newFirstName.value} onChange={newFirstName.onChange} />
+                    <label htmlFor="firstName">First Name</label>
+                    <FNInput firstName={data.me.firstName} />
+                    {/* <input id="firstName" value={newFirstName.value} onChange={newFirstName.onChange} /> */}
                   </Label>
                   <Label>
-                    <label id="lastName">Last Name</label>
-                    <input placeholder={data.me.lastName} id="lastName" value={newLastName.value} onChange={newLastName.onChange} />
+                    <label htmlFor="lastName">Last Name</label>
+                    <LNInput lastName={data.me.lastName} />
+                    {/* <input id="lastName" value={newLastName.value} onChange={newLastName.onChange} /> */}
                   </Label>
                   <Label>
-                    <label id="bio">Bio</label>
-                    <input placeholder={data.me.bio} id="bio" value={newBio.value} onChange={newBio.onChange} />
+                    <label htmlFor="bio">Bio</label>
+                    <BIOInput bio={data.me.bio} />
+                    {/* <input id="bio" value={newBio.value} onChange={newBio.onChange} /> */}
                   </Label>
                   <button onClick={onClick}>Upload</button>
                 </form>
@@ -178,5 +181,20 @@ const EditProfile = () => {
       }
     </>
   )
+}
+
+const FNInput = ({ firstName }) => {
+  const pre = useInput(firstName);
+  return <input value={pre.value} onChange={pre.onChange} />
+}
+
+const LNInput = ({ lastName }) => {
+  const pre = useInput(lastName);
+  return <input value={pre.value} onChange={pre.onChange} />
+}
+
+const BIOInput = ({ firstName }) => {
+  const pre = useInput(firstName);
+  return <input value={pre.value} onChange={pre.onChange} />
 }
 export default EditProfile;

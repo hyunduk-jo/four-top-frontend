@@ -108,7 +108,7 @@ const AuthPresenter = ({ action, setAction, email, userName, firstName, lastName
               action === "login" ? (
                 <>Don't have an account? <State onClick={() => setAction("signup")}>Sign Up</State></>
               ) : (
-                <>You have an account? <State onClick={() => setAction("login")}>Sign Up</State></>
+                <>You have an account? <State onClick={() => setAction("login")}>Log In</State></>
               )
             }
           </StateChanger>
