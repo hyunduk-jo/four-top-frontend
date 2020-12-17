@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Avatar from "./Avatar";
+import Avatar from "../Utils/Avatar";
 
 const Container = styled.div`
   width: 210px;
@@ -35,7 +35,6 @@ const GalleryCreator = ({ followersCount, userName, bio, avatar }) => {
     <TextContainer>
       <Text onClick={() => { window.location = `#/profile/${userName}` }}>{userName}</Text>
       <Text>followers: {followersCount}명</Text>
-      <Text>{bio}</Text>
     </TextContainer>
   </Container>
 }

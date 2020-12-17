@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import Avatar from "./Avatar";
+import Avatar from "./Utils/Avatar";
 
 const Container = styled.div`
   display: flex;

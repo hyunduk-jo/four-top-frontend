@@ -36,7 +36,7 @@ const Close = styled.button`
   border:none;
 `;
 
-const Modal = ({ following, followers, state, setState }) => {
+const Modal = ({ following, followers, state, setState, isFollowing }) => {
   return (
     <>
       {

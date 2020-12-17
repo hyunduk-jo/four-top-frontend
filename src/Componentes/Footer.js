@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Facebook, Instagram, Twitter, Youtube } from "./Icons";
+import { Facebook, Instagram, Twitter, Youtube } from "./Utils/Icons";
 
 const FooterContainer = styled.footer`
   width: 100%;

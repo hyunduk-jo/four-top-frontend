@@ -2,8 +2,8 @@ import { useMutation, useQuery } from "@apollo/client";
 import { gql } from "apollo-boost";
 import { Link, withRouter } from "react-router-dom";
 import styled from "styled-components";
-import useInput from "../Hooks/useInput";
-import { Basket, Logout, Setting, User } from "./Icons";
+import useInput from "../../Hooks/useInput";
+import { Basket, Logout, Setting, User } from "../Utils/Icons";
 import Helmet from 'react-helmet';
 
 const HeaderContainer = styled.header`

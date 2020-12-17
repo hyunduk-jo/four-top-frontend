@@ -11,9 +11,9 @@ import Rental from '../Routes/Rental';
 import Promotion from '../Routes/Promotion';
 import Magazine from '../Routes/Magazine';
 import ServiceCenter from '../Routes/ServiceCenter';
-import Header from './Header';
+import Header from './Header/Header';
+import HomeHeader from './Header/HomeHeader';
 import Search from '../Routes/Search/index';
-import HomeHeader from './HomeHeader';
 import GalleryNew from '../Routes/Gallery/GalleryNew';
 import EditProfile from '../Routes/EditProfile';
 

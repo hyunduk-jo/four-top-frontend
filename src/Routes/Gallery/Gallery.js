@@ -1,10 +1,12 @@
 import { useQuery } from "@apollo/client";
 import { gql } from "apollo-boost";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import GalleryCreator from "../../Componentes/GalleryCreator";
-import GalleryPost from "../../Componentes/GalleryPost";
-import Loader from "../../Componentes/Loader";
+import GalleryCreator from "../../Componentes/Gallery/GalleryCreator";
+import GalleryPost from "../../Componentes/Gallery/GalleryPost";
+import NextPage from "../../Componentes/PageButton/NextPage";
+import Loader from "../../Componentes/Utils/Loader";
 
 const Wrapper = styled.div`
   display: flex;
@@ -76,20 +78,24 @@ const ALL_POST = gql`
 `;
 
 const ALL_USER = gql`
-  {
-  allUser{
-    id
-    avatar
-    followersCount
-    userName
-    bio
+  query allUser($skip: Int , $first: Int ){
+    allUser(skip: $skip, first: $first){
+      id
+      avatar
+      followersCount
+      userName
+      bio
+    }
   }
-}
 `;
 
 const Gallery = () => {
+  const [skip, setSkip] = useState(0);
+  const [first, setFirst] = useState(2);
   const { data: postData, loading: postLoading } = useQuery(ALL_POST);
-  const { data: userData, loading: userLoading } = useQuery(ALL_USER);
+  const { data: userData, loading: userLoading } = useQuery(ALL_USER, {
+    variables: { skip, first }
+  });
   return (
     <>
       <BtnWrapper><BtnContainer><Link to="/gallery/new"><Button>New Post</Button></Link></BtnContainer></BtnWrapper>
@@ -125,6 +131,7 @@ const Gallery = () => {
               })
             )
           }
+          <NextPage onClick={() => { setFirst(first + 2); setSkip(skip + 2) }} />
         </CreatorContainer>
       </Wrapper>
     </>

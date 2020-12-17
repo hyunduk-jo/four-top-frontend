@@ -3,8 +3,8 @@ import { gql } from "apollo-boost";
 import Axios from "axios";
 import { useState } from "react";
 import styled from "styled-components";
-import Avatar from "../Componentes/Avatar";
-import Loader from "../Componentes/Loader";
+import Avatar from "../Componentes/Utils/Avatar";
+import Loader from "../Componentes/Utils/Loader";
 import useInput from "../Hooks/useInput";
 
 const Wrapper = styled.div`
@@ -193,8 +193,8 @@ const LNInput = ({ lastName }) => {
   return <input value={pre.value} onChange={pre.onChange} />
 }
 
-const BIOInput = ({ firstName }) => {
-  const pre = useInput(firstName);
+const BIOInput = ({ bio }) => {
+  const pre = useInput(bio);
   return <input value={pre.value} onChange={pre.onChange} />
 }
 export default EditProfile;

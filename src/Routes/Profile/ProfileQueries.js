@@ -10,6 +10,7 @@ export const SEE_USER = gql`
       avatar
       postsCount
       isFollowing
+      isSelf
       followers{
         id
         userName

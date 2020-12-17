@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import Avatar from "../../Componentes/Avatar";
+import Avatar from "../../Componentes/Utils/Avatar";
 import Modal from "../../Componentes/Modal";
 
 const Wrapper = styled.div`
@@ -68,7 +68,6 @@ const Text = styled.div`
 `;
 
 const ProfilePresenter = ({
-  loading,
   userName,
   avatar,
   bio,
@@ -83,6 +82,7 @@ const ProfilePresenter = ({
   setState,
   postsCount,
   isFollowing,
+  isSelf,
   firstName,
   lastName
 }) => {

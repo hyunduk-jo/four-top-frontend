@@ -47,7 +47,7 @@ const AuthContainer = () => {
         toast.error("Email is required");
       }
     } else if (action === "signup") {
-      if (email.value !== "" && userName.value !== "" && firstName.value !== "" && lastName.value !== "") {
+      if (email.value !== "" && userName.value !== "") {
         try {
           const { data: { createAccount } } = await createAccountMutation();
           if (createAccount) {
@@ -60,7 +60,7 @@ const AuthContainer = () => {
           toast.error(e.message);
         }
       } else {
-        toast.error("All fields are required");
+        toast.error("Email and Username fields are required");
       }
     } else if (action === "confirm") {
       if (secret !== "") {

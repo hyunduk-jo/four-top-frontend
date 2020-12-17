@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/client';
 import { useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
-import Loader from '../../Componentes/Loader';
+import Loader from '../../Componentes/Utils/Loader';
 import ProfilePresenter from './ProfilePresenter';
 import { SEE_USER } from './ProfileQueries';
 
@@ -21,7 +21,6 @@ const ProfileContainer = ({ match: { params: { username } } }) => {
   return loading ? (<Container><Loader /></Container>) : (
     !loading && data?.seeUser && (
       <ProfilePresenter
-        loading={loading}
         userName={username}
         avatar={data.seeUser.avatar}
         bio={data.seeUser.bio}
@@ -36,6 +35,7 @@ const ProfileContainer = ({ match: { params: { username } } }) => {
         setState={setState}
         postsCount={data.seeUser.postsCount}
         isFollowing={data.seeUser.isFollowing}
+        isSelf={data.seeUser.isSelf}
         firstName={data.seeUser.firstName}
         lastName={data.seeUser.lastName}
       />
