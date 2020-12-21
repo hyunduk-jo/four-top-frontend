@@ -30,6 +30,7 @@ const AppRouter = ({ isLoggedIn }) => {
 
       <Route exact path="/gallery" render={() => <><Header isLoggedIn={isLoggedIn} /><Gallery /></>} />
       <Route path="/gallery/new" render={() => <><Header isLoggedIn={isLoggedIn} /><GalleryNew isLoggedIn={isLoggedIn} /></>} />
+      <Route path="/gallery/p/:id" route={null} />
 
       <Route path="/community" render={() => <><Header isLoggedIn={isLoggedIn} /><Community /></>} />
       <Route path="/rental" render={() => <><Header isLoggedIn={isLoggedIn} /><Rental /></>} />
@@ -40,6 +41,8 @@ const AppRouter = ({ isLoggedIn }) => {
       <Route path="/profile/:username" render={() => <><Header isLoggedIn={isLoggedIn} /><Profile /></>} />
 
       <Route path="/edit/:username" render={() => <><Header isLoggedIn={isLoggedIn} /><EditProfile /></>} />
+
+      <Route path="*" render={() => <>NOT FOUND</>} />
     </Switch>
   )
 }

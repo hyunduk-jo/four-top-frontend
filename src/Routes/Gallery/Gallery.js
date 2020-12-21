@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import GalleryCreator from "../../Componentes/Gallery/GalleryCreator";
 import GalleryPost from "../../Componentes/Gallery/GalleryPost";
-import NextPage from "../../Componentes/PageButton/NextPage";
+import { Next, Prev } from "../../Componentes/Utils/Icons";
 import Loader from "../../Componentes/Utils/Loader";
 
 const Wrapper = styled.div`
@@ -49,6 +49,9 @@ const PaymentContainer = styled(FreeContainer)`
 `;
 
 const CreatorContainer = styled(FreeContainer)`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   min-height: 300px;
 `;
 
@@ -56,6 +59,17 @@ const Text = styled.div`
   width: 80%;
   font-weight: 600;
   font-size: 20px;
+`;
+
+const SlideButton = styled.button`
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: none;
+  svg{
+    fill: white
+  }
+  background-color: ${props => props.theme.blueColor};
 `;
 
 const ALL_POST = gql`
@@ -91,7 +105,7 @@ const ALL_USER = gql`
 
 const Gallery = () => {
   const [skip, setSkip] = useState(0);
-  const [first, setFirst] = useState(2);
+  const [first, setFirst] = useState(3);
   const { data: postData, loading: postLoading } = useQuery(ALL_POST);
   const { data: userData, loading: userLoading } = useQuery(ALL_USER, {
     variables: { skip, first }
@@ -122,6 +136,9 @@ const Gallery = () => {
         <Text>Best Creator</Text>
         <CreatorContainer>
           {
+            skip === 0 ? <></> : <SlideButton onClick={() => { setFirst(first - 3); setSkip(skip - 3) }}><Prev /></SlideButton>
+          }
+          {
             userLoading && <Loader />
           }
           {
@@ -131,7 +148,10 @@ const Gallery = () => {
               })
             )
           }
-          <NextPage onClick={() => { setFirst(first + 2); setSkip(skip + 2) }} />
+          {
+            !userLoading && userData?.allUser && userData.allUser.length === 0 && (setFirst(first - 3), setSkip(skip - 3), alert("마지막입니다."))
+          }
+          <SlideButton onClick={() => { setFirst(first + 3); setSkip(skip + 3) }}><Next /></SlideButton>
         </CreatorContainer>
       </Wrapper>
     </>

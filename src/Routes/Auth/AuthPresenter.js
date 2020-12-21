@@ -6,6 +6,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  height: 80vh;
 `;
 
 const LogoContainer = styled.div`
