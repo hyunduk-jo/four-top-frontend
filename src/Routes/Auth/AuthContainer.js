@@ -13,9 +13,7 @@ const AuthContainer = () => {
   const lastName = useInput("");
   const secret = useInput("");
 
-  const [createAccountMutation] = useMutation(CREATE_ACCOUNT, {
-    variables: { email: email.value, userName: userName.value, firstName: firstName.value, lastName: lastName.value }
-  })
+  const [createAccountMutation] = useMutation(CREATE_ACCOUNT)
 
   const [requestSecretMutation] = useMutation(REQUEST_SECRET, {
     variables: { email: email.value }
@@ -49,7 +47,9 @@ const AuthContainer = () => {
     } else if (action === "signup") {
       if (email.value !== "" && userName.value !== "") {
         try {
-          const { data: { createAccount } } = await createAccountMutation();
+          const { data: { createAccount } } = await createAccountMutation({
+            variables: { email: email.value, userName: userName.value, firstName: firstName.value, lastName: lastName.value }
+          });
           if (createAccount) {
             toast.success("Account created, login now!");
             setTimeout(setAction("login"), 1500);
@@ -80,6 +80,20 @@ const AuthContainer = () => {
       }
     }
   }
+
+  const googleSubmit = async (res) => {
+    console.log(res);
+    const { data: { createAccount } } = await createAccountMutation({
+      variables: { email: res.profileObj.email, userName: res.profileObj.googleId, firstName: res.profileObj.givenName, lastName: res.profileObj.familyName }
+    })
+    if (createAccount) {
+      toast.success("Account created, login now!");
+      setTimeout(setAction("login"), 1500);
+    } else {
+      toast.error("Can't create account now, try again");
+    }
+  }
+
   return <AuthPresenter
     action={action}
     setAction={setAction}
@@ -88,7 +102,9 @@ const AuthContainer = () => {
     firstName={firstName}
     lastName={lastName}
     secret={secret}
-    onSubmit={onSubmit} />
+    onSubmit={onSubmit}
+    googleSubmit={googleSubmit}
+  />
 }
 
 export default AuthContainer;

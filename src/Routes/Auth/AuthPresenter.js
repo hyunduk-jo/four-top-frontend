@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import {GoogleLogin} from 'react-google-login';
 
 const Container = styled.div`
   display: flex;
@@ -34,7 +35,9 @@ const FormContainer = styled.div`
   margin-top: 50px;
 `;
 
-const Form = styled.form``;
+const Form = styled.form`
+  margin-bottom: 20px;
+`;
 
 const Input = styled.input`
   width: 100%;
@@ -68,7 +71,7 @@ const State = styled.span`
   cursor: pointer;
 `;
 
-const AuthPresenter = ({ action, setAction, email, userName, firstName, lastName, secret, onSubmit }) => {
+const AuthPresenter = ({ action, setAction, email, userName, firstName, lastName, secret, onSubmit, googleSubmit }) => {
   return <Container>
     <LogoContainer>
       <Link to="/"><Logo src={process.env.PUBLIC_URL + '/logo.jpg'} alt="four-top-logo" /></Link>
@@ -85,13 +88,16 @@ const AuthPresenter = ({ action, setAction, email, userName, firstName, lastName
       }
       {
         action === "signup" && (
-          <Form onSubmit={onSubmit}>
-            <Input placeholder="Email" value={email.value} onChange={email.onChange} />
-            <Input placeholder="Username" value={userName.value} onChange={userName.onChange} />
-            <Input placeholder="Firstname" value={firstName.value} onChange={firstName.onChange} />
-            <Input placeholder="Lastname" value={lastName.value} onChange={lastName.onChange} />
-            <Button>Sign Up</Button>
-          </Form>
+          <>
+            <Form onSubmit={onSubmit}>
+              <Input placeholder="Email" value={email.value} onChange={email.onChange} />
+              <Input placeholder="Username" value={userName.value} onChange={userName.onChange} />
+              <Input placeholder="Firstname" value={firstName.value} onChange={firstName.onChange} />
+              <Input placeholder="Lastname" value={lastName.value} onChange={lastName.onChange} />
+              <Button>Sign Up</Button>
+            </Form>
+            <GoogleLogin style={{fontWeight: 600}} clientId={process.env.REACT_APP_GOOGLE_KEY} buttonText="Google" onSuccess={googleSubmit} onFailure={(e) => console.log(e)} />
+          </>
         )
       }
       {
